@@ -46,11 +46,6 @@
 
   /* header */
   header.hd{padding:6px 2px 18px;text-align:center;}
-  .hd-main{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:13px;margin:.4em 0 .25em;}
-  .hd-main h1{margin:0;}
-  .brand-img{width:62px;height:62px;border-radius:18px;object-fit:contain;flex:0 0 auto;
-    background:rgba(255,255,255,.05);border:1px solid var(--brd);
-    box-shadow:0 0 30px -8px rgba(79,140,255,.55),0 1px 0 rgba(255,255,255,.08) inset;}
   .eyebrow{font-size:10.5px;letter-spacing:.3em;font-weight:600;text-transform:uppercase;
     display:inline-flex;align-items:center;gap:9px;color:var(--cyan);}
   .eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan);animation:pulse 2.4s ease-in-out infinite;}
@@ -207,10 +202,10 @@
 
   <!-- STEP 1 -->
   <section class="card">
-    <div class="step"><div><h2>基本情報</h2><p class="sub">運用する期間と金額</p></div></div>
+    <div class="step"><div><h2>基本情報</h2></div></div>
     <div class="divider"></div>
     <div class="grid2">
-      <div class="field"><label for="ageStart">開始年齢</label>
+      <div class="field"><label for="ageStart">運用開始年齢</label>
         <div class="inputrow"><input type="number" id="ageStart" inputmode="numeric" min="0" max="99" placeholder="35"><span class="unit">歳</span></div></div>
       <div class="field"><label for="ageEnd">運用終了年齢</label>
         <div class="inputrow"><input type="number" id="ageEnd" inputmode="numeric" min="1" max="100" placeholder="65"><span class="unit">歳</span></div></div>
@@ -219,12 +214,12 @@
       <div class="field"><label for="lump">一括投資額</label>
         <div class="inputrow"><input type="number" id="lump" inputmode="numeric" min="0" step="10000" placeholder="0"><span class="unit">円</span></div></div>
     </div>
-    <p class="hint">積立・一括どちらか、または両方を入力（片方は0でOK）<br>開始年齢は年代の判定にも使います</p>
+    <p class="hint">積立・一括どちらか、または両方を入力（片方は0でOK）<br>運用開始年齢は年代の判定にも使います</p>
   </section>
 
   <!-- STEP 2 -->
   <section class="card">
-    <div class="step"><div><h2>リスク許容度を診断</h2><p class="sub">全10問 + 婚姻区分</p></div></div>
+    <div class="step"><div><h2>リスク許容度を診断</h2></div></div>
     <div class="divider"></div>
 
     <div class="field"><label>婚姻区分</label>
@@ -463,8 +458,8 @@
   document.getElementById("run").addEventListener("click",function(){
     clearErr();
     var s=getNum("ageStart"),e=getNum("ageEnd"),m=getNum("monthly")||0,l=getNum("lump")||0;
-    if(s===null||e===null) return showErr("開始年齢と運用終了年齢を入力してください。");
-    if(e<=s) return showErr("運用終了年齢は開始年齢より大きくしてください。");
+    if(s===null||e===null) return showErr("運用開始年齢と運用終了年齢を入力してください。");
+    if(e<=s) return showErr("運用終了年齢は運用開始年齢より大きくしてください。");
     if(m<=0&&l<=0) return showErr("毎月の積立額か一括投資額を入力してください。");
     var qScore=0;
     for(var qi=0;qi<QUESTIONS.length;qi++){var v=radioVal("q"+qi);if(v===null)return showErr("Q"+(qi+1)+" が未回答です。10問すべてに答えてください。");qScore+=parseInt(v,10);}
