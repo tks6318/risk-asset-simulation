@@ -248,7 +248,6 @@
     <div class="hero">
       <div class="hl" id="heroLabel">運用終了時の資産（中央値）</div>
       <div class="hbig"><span class="num" id="heroMan">0</span><span class="yen">万円</span></div>
-      <div class="hrange" id="heroRange"></div>
       <div class="herometa">
         <div class="metabox"><div class="ml">投資元本の合計</div><div class="mv" id="mPrincipal">—</div></div>
         <div class="metabox"><div class="ml">運用益（中央値）</div><div class="mv gain" id="mGain">—</div></div>
@@ -556,8 +555,7 @@
     drawPortfolio(onKey);
     document.getElementById("pfSub").textContent="（"+T.name+"）の資産配分の一例";
 
-    document.getElementById("heroLabel").textContent="運用終了時の予想資産額（想定リターン通り・"+T.name+"）";
-    document.getElementById("heroRange").textContent="モンテカルロ試算（下振れ〜上振れ／10〜90%）："+man(fin.p10)+" 〜 "+man(fin.p90);
+    document.getElementById("heroLabel").innerHTML="運用終了時の予想資産額<br>（想定リターン通り・"+T.name+"）";
     document.getElementById("mPrincipal").textContent=man(principal);
     document.getElementById("mGain").textContent="＋"+man(detFin-principal);
 
