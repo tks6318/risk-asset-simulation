@@ -11,11 +11,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#070b18; --text:#e9eef9; --muted:#8893b0; --faint:#5c6a8f;
-    --glass:rgba(255,255,255,.045); --brd:rgba(255,255,255,.10); --brd-soft:rgba(255,255,255,.06);
-    --cyan:#22d3ee; --blue:#4f8cff; --violet:#a78bfa;
-    --stable:#2dd4bf; --balance:#5b9dff; --aggr:#ffb454; --bad:#ff6b81;
-    --grad:linear-gradient(100deg,#22d3ee,#4f8cff 55%,#a78bfa);
+    --navy:#0e3a6b; --blue:#2f6fb5; --blue-l:#4a90d9; --sky:#eaf2fb;
+    --bg:#ffffff; --panel:#f5f8fc; --text:#1f2a3a; --muted:#64748b; --faint:#94a3b8;
+    --brd:#e3e9f2; --brd-soft:#eef2f8;
+    --stable:#1f9e8f; --balance:#2f6fb5; --aggr:#e07a1f; --bad:#d64550;
+    --grad:linear-gradient(100deg,#2f6fb5,#4a90d9);
     --font:"Space Grotesk","Zen Kaku Gothic New",system-ui,-apple-system,sans-serif;
     --col:520px;
   }
@@ -23,99 +23,77 @@
   html,body{margin:0;padding:0;}
   body{font-family:var(--font);color:var(--text);background:var(--bg);line-height:1.7;
     -webkit-font-smoothing:antialiased;overflow-x:hidden;touch-action:manipulation;}
+  .bg{position:fixed;inset:0;z-index:-1;background:
+      radial-gradient(800px 420px at 50% -120px, rgba(74,144,217,.14), transparent 70%),
+      linear-gradient(180deg,#ffffff,#fbfdff);}
 
-  /* ambient bg */
-  .bg{position:fixed;inset:0;z-index:-1;overflow:hidden;
-    background:
-      radial-gradient(900px 600px at 80% -8%, rgba(78,140,255,.16), transparent 60%),
-      radial-gradient(800px 700px at 4% 10%, rgba(167,139,250,.13), transparent 60%),
-      linear-gradient(180deg,#070b18,#080d1d 40%,#060912);}
-  .blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.45;mix-blend-mode:screen;}
-  .blob.a{width:360px;height:360px;background:#1f6bd6;top:-110px;right:-90px;animation:drift1 18s ease-in-out infinite;}
-  .blob.b{width:340px;height:340px;background:#7b3ff2;bottom:-130px;left:-110px;animation:drift2 22s ease-in-out infinite;}
-  .blob.c{width:260px;height:260px;background:#14b8c4;top:44%;left:58%;opacity:.26;animation:drift1 26s ease-in-out infinite reverse;}
-  @keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(-36px,28px)}}
-  @keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(44px,-26px)}}
-  .grid-overlay{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
-    background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-    background-size:42px 42px;
-    -webkit-mask-image:radial-gradient(ellipse 85% 55% at 50% 0%, #000 30%, transparent 75%);
-    mask-image:radial-gradient(ellipse 85% 55% at 50% 0%, #000 30%, transparent 75%);}
-
-  .wrap{max-width:var(--col);margin:0 auto;padding:22px 15px calc(112px + env(safe-area-inset-bottom,0px));}
+  .wrap{max-width:var(--col);margin:0 auto;padding:22px 15px calc(118px + env(safe-area-inset-bottom,0px));}
 
   /* header */
-  header.hd{padding:6px 2px 18px;text-align:center;}
+  header.hd{padding:4px 2px 18px;text-align:center;}
+  .logo{height:74px;width:auto;margin:0 auto 10px;display:block;}
   .eyebrow{font-size:10.5px;letter-spacing:.3em;font-weight:600;text-transform:uppercase;
-    display:inline-flex;align-items:center;gap:9px;color:var(--cyan);}
-  .eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan);animation:pulse 2.4s ease-in-out infinite;}
+    display:inline-flex;align-items:center;gap:9px;color:var(--blue);}
+  .eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--blue-l);box-shadow:0 0 10px var(--blue-l);animation:pulse 2.4s ease-in-out infinite;}
   @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
-  header.hd h1{font-size:24px;line-height:1.4;margin:.5em 0 .25em;font-weight:700;letter-spacing:.01em;}
+  header.hd h1{font-size:24px;line-height:1.4;margin:.5em 0 .15em;font-weight:700;color:var(--navy);}
   header.hd h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
-  header.hd p{font-size:13px;color:var(--muted);margin:0;}
+  .co-line{font-size:12px;color:var(--muted);margin:6px 0 0;font-weight:600;}
 
   /* cards */
-  .card{background:var(--glass);border:1px solid var(--brd);border-radius:20px;padding:20px 18px;margin:14px 0;
-    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-    box-shadow:0 1px 0 rgba(255,255,255,.05) inset,0 22px 46px -34px rgba(0,0,0,.9);}
+  .card{background:#fff;border:1px solid var(--brd);border-radius:20px;padding:20px 18px;margin:14px 0;
+    box-shadow:0 1px 2px rgba(15,40,80,.03),0 18px 40px -32px rgba(15,40,80,.35);}
   .step{display:flex;align-items:center;gap:13px;}
-  .step .no{font-size:12px;font-weight:600;color:var(--cyan);letter-spacing:.16em;
-    border:1px solid rgba(34,211,238,.4);border-radius:8px;padding:5px 8px;line-height:1;
-    background:rgba(34,211,238,.08);box-shadow:0 0 18px -6px rgba(34,211,238,.5);}
-  .step h2{font-size:16px;margin:0;font-weight:700;}
-  .step .sub{font-size:11.5px;color:var(--muted);margin:1px 0 0;}
+  .step h2{font-size:16px;margin:0;font-weight:700;color:var(--navy);}
   .divider{height:1px;background:var(--brd-soft);margin:16px 0;}
 
   /* form */
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
-  .field label{display:block;font-size:12px;font-weight:600;color:#aeb9d6;margin:0 0 7px;}
+  .field label{display:block;font-size:12px;font-weight:600;color:var(--navy);margin:0 0 7px;}
   .inputrow{position:relative;}
   .inputrow .unit{position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--muted);pointer-events:none;}
-  input[type=number]{width:100%;padding:13px 40px 13px 13px;font-size:16px;font-family:var(--font);
-    border:1px solid var(--brd);border-radius:13px;background:rgba(255,255,255,.04);color:var(--text);
+  input.fld{width:100%;padding:13px 40px 13px 13px;font-size:16px;font-family:var(--font);
+    border:1px solid var(--brd);border-radius:13px;background:#fbfdff;color:var(--text);
     -moz-appearance:textfield;transition:.15s;font-variant-numeric:tabular-nums;}
-  input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
-  input::placeholder{color:#56618a;}
-  input[type=number]:focus{outline:none;border-color:rgba(34,211,238,.7);background:rgba(34,211,238,.05);
-    box-shadow:0 0 0 3px rgba(34,211,238,.12),0 0 22px -8px rgba(34,211,238,.6);}
+  input.fld::-webkit-outer-spin-button,input.fld::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+  input.fld::placeholder{color:#b6c2d6;}
+  input.fld:focus{outline:none;border-color:var(--blue-l);background:#fff;box-shadow:0 0 0 3px rgba(74,144,217,.14);}
   .hint{font-size:11.5px;color:var(--muted);margin:11px 2px 0;}
 
-  /* chips */
+  /* chips / mode */
   .chips{display:flex;flex-wrap:wrap;gap:9px;}
   .chip input{position:absolute;opacity:0;width:0;height:0;}
-  .chip label{display:block;padding:11px 18px;border:1px solid var(--brd);border-radius:999px;
-    font-size:13.5px;font-weight:600;color:var(--muted);background:rgba(255,255,255,.03);cursor:pointer;transition:.15s;user-select:none;}
-  .chip input:checked + label{color:#fff;border-color:transparent;background:var(--grad);box-shadow:0 0 20px -6px rgba(79,140,255,.7);}
-  .chip input:focus-visible + label{outline:2px solid var(--cyan);outline-offset:2px;}
+  .chip label{display:block;padding:11px 20px;border:1px solid var(--brd);border-radius:999px;
+    font-size:13.5px;font-weight:600;color:var(--muted);background:#fbfdff;cursor:pointer;transition:.15s;user-select:none;}
+  .chip input:checked + label{color:#fff;border-color:transparent;background:var(--grad);box-shadow:0 6px 16px -6px rgba(47,111,181,.5);}
+  .chip input:focus-visible + label{outline:2px solid var(--blue-l);outline-offset:2px;}
+  .mode-note{font-size:11.5px;color:var(--muted);margin:9px 2px 0;}
 
   /* questions */
   .q{padding:17px 0;border-top:1px solid var(--brd-soft);}
   .q:first-of-type{border-top:none;padding-top:4px;}
   .qhead{display:flex;gap:10px;align-items:flex-start;margin:0 0 12px;}
-  .qn{flex:0 0 auto;font-size:11.5px;font-weight:600;color:var(--cyan);border:1px solid rgba(34,211,238,.35);
-    border-radius:7px;padding:3px 7px;line-height:1.3;margin-top:1px;background:rgba(34,211,238,.06);}
-  .qt{font-size:14px;font-weight:500;line-height:1.6;color:#dde4f4;}
-  .opts{display:flex;flex-direction:column;gap:9px;padding-left:0;}
+  .qn{flex:0 0 auto;font-size:11.5px;font-weight:600;color:#fff;background:var(--blue);border-radius:7px;padding:3px 7px;line-height:1.3;margin-top:1px;}
+  .qt{font-size:14px;font-weight:500;line-height:1.6;color:#2b3a4f;}
+  .opts{display:flex;flex-direction:column;gap:9px;}
   .opt input{position:absolute;opacity:0;width:0;height:0;}
   .opt label{display:flex;align-items:center;gap:12px;min-height:50px;padding:11px 15px;border:1px solid var(--brd);
-    border-radius:13px;font-size:14px;color:#c3cce4;background:rgba(255,255,255,.025);cursor:pointer;transition:.14s;user-select:none;}
-  .opt label::before{content:"";flex:0 0 auto;width:17px;height:17px;border-radius:50%;border:1.5px solid #4a5680;background:transparent;transition:.14s;}
-  .opt input:checked + label{border-color:rgba(34,211,238,.6);background:rgba(34,211,238,.08);color:#fff;font-weight:600;box-shadow:0 0 22px -10px rgba(34,211,238,.7);}
-  .opt input:checked + label::before{border-color:var(--cyan);box-shadow:inset 0 0 0 4px var(--cyan),0 0 10px var(--cyan);}
-  .opt input:focus-visible + label{outline:2px solid var(--cyan);outline-offset:2px;}
-  .opt input:active + label{transform:scale(.99);}
+    border-radius:13px;font-size:14px;color:#3a4759;background:#fbfdff;cursor:pointer;transition:.14s;user-select:none;}
+  .opt label::before{content:"";flex:0 0 auto;width:17px;height:17px;border-radius:50%;border:1.5px solid #c4d0e2;background:#fff;transition:.14s;}
+  .opt input:checked + label{border-color:var(--blue-l);background:var(--sky);color:var(--navy);font-weight:600;}
+  .opt input:checked + label::before{border-color:var(--blue);box-shadow:inset 0 0 0 4px var(--blue);}
+  .opt input:focus-visible + label{outline:2px solid var(--blue-l);outline-offset:2px;}
 
-  /* sticky CTA bar */
-  .cta-bar{position:fixed;left:0;right:0;bottom:0;z-index:50;
-    background:linear-gradient(to top,rgba(6,9,18,.97),rgba(6,9,18,.82));
-    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--brd);
+  /* sticky CTA */
+  .cta-bar{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,255,255,.94);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--brd);
     padding:11px 15px calc(11px + env(safe-area-inset-bottom,0px));}
   .cta-inner{max-width:var(--col);margin:0 auto;}
   .cta-row{display:flex;gap:10px;}
-  .btn{border:none;border-radius:14px;font-size:15px;font-weight:700;font-family:var(--font);cursor:pointer;transition:.16s;letter-spacing:.02em;}
-  .btn-primary{flex:1;color:#04121f;background:var(--grad);padding:15px;box-shadow:0 10px 28px -10px rgba(79,140,255,.7),0 0 0 1px rgba(255,255,255,.08) inset;}
+  .btn{border:none;border-radius:14px;font-size:15px;font-weight:700;font-family:var(--font);cursor:pointer;transition:.16s;}
+  .btn-primary{flex:1;color:#fff;background:var(--grad);padding:15px;box-shadow:0 10px 24px -10px rgba(47,111,181,.6);}
   .btn-primary:active{transform:translateY(1px);}
-  .btn-ghost{flex:0 0 auto;background:rgba(255,255,255,.06);color:#c7d0e8;border:1px solid var(--brd);padding:15px 18px;}
+  .btn-ghost{flex:0 0 auto;background:#eef2f8;color:var(--navy);border:1px solid var(--brd);padding:15px 18px;}
   .btn-ghost:active{transform:translateY(1px);}
   .cta-err{display:none;color:var(--bad);font-size:12.5px;font-weight:600;margin:0 2px 9px;padding-left:22px;position:relative;}
   .cta-err::before{content:"!";position:absolute;left:0;top:0;width:16px;height:16px;border-radius:50%;border:1.5px solid var(--bad);font-size:11px;text-align:center;line-height:14px;}
@@ -123,110 +101,125 @@
 
   /* result */
   #result{display:none;}
-  #result.show{display:block;animation:rise .55s cubic-bezier(.2,.7,.2,1) both;}
-  @keyframes rise{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+  #result.show{display:block;animation:rise .5s cubic-bezier(.2,.7,.2,1) both;}
+  @keyframes rise{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
 
-  .verdict{position:relative;overflow:hidden;border-radius:22px;padding:6px 18px 22px;border:1px solid var(--brd);
-    background:radial-gradient(120% 90% at 50% -20%, rgba(79,140,255,.14), transparent 60%),var(--glass);
-    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
+  .verdict{border:1px solid var(--brd);border-radius:22px;padding:6px 18px 22px;background:linear-gradient(180deg,#fff,#fbfdff);
+    box-shadow:0 18px 40px -32px rgba(15,40,80,.35);}
   .gauge-wrap{display:flex;justify-content:center;margin:4px 0 0;}
   #gauge{width:100%;max-width:320px;height:auto;}
   .vmeta{text-align:center;}
-  .vlabel{font-size:10.5px;letter-spacing:.26em;color:var(--muted);text-transform:uppercase;}
-  .vtype{font-size:29px;font-weight:700;margin:5px 0 8px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
-  #typeName{filter:drop-shadow(0 0 18px currentColor);}
-  .vtag{font-size:12px;font-weight:600;padding:5px 13px;border-radius:999px;border:1px solid var(--brd);background:rgba(255,255,255,.05);color:#cdd6ee;}
-  .vcomment{font-size:13px;line-height:1.75;color:#b6c0db;margin:0 auto;max-width:40ch;}
+  .vlabel{font-size:10.5px;letter-spacing:.24em;color:var(--muted);text-transform:uppercase;}
+  .vtype{font-size:28px;font-weight:700;margin:5px 0 8px;display:flex;align-items:center;justify-content:center;gap:11px;flex-wrap:wrap;}
+  .vtag{font-size:12px;font-weight:600;padding:5px 12px;border-radius:999px;border:1px solid var(--brd);background:#fff;color:var(--muted);}
+  .vcomment{font-size:13px;line-height:1.75;color:#46586e;margin:0 auto;max-width:40ch;}
 
-  .hero{margin-top:14px;border:1px solid var(--brd);border-radius:20px;padding:22px 18px;text-align:center;
-    background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
-  .hero .hl{font-size:11px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;}
+  .hero{margin-top:14px;border:1px solid var(--brd);border-radius:20px;padding:22px 18px;text-align:center;background:#fff;}
+  .hero .hl{font-size:11px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;}
   .hero .hbig{line-height:1;margin:10px 0 4px;font-weight:700;}
-  .hero .hbig .num{font-size:50px;font-variant-numeric:tabular-nums;background:var(--grad);
-    -webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 24px rgba(79,140,255,.35));}
-  .hero .hbig .yen{font-size:19px;color:#aeb9d6;margin-left:5px;}
-  .hero .hfull{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;}
+  .hero .hbig .num{font-size:50px;font-variant-numeric:tabular-nums;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero .hbig .yen{font-size:19px;color:var(--navy);margin-left:5px;}
+  .hero .hrange{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;margin-top:3px;}
   .herometa{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:16px;}
-  .metabox{border:1px solid var(--brd);border-radius:14px;padding:13px 11px;background:rgba(255,255,255,.025);}
+  .metabox{border:1px solid var(--brd);border-radius:14px;padding:13px 11px;background:#fbfdff;}
   .metabox .ml{font-size:11px;color:var(--muted);}
-  .metabox .mv{font-size:20px;font-weight:600;margin-top:3px;font-variant-numeric:tabular-nums;}
-  .metabox .mv.gain{color:var(--aggr);text-shadow:0 0 18px rgba(255,180,84,.45);}
+  .metabox .mv{font-size:20px;font-weight:600;margin-top:3px;font-variant-numeric:tabular-nums;color:var(--navy);}
+  .metabox .mv.gain{color:var(--aggr);}
 
-  .pf h3{font-size:14px;margin:0 0 3px;font-weight:700;}
-  .pf .csub{font-size:11.5px;color:var(--muted);margin:0 0 15px;}
+  .pf h3,.chartcard h3,.cmp h3{font-size:14px;margin:0 0 3px;font-weight:700;color:var(--navy);}
+  .pf .csub,.chartcard .csub{font-size:11.5px;color:var(--muted);margin:0 0 14px;line-height:1.5;}
   .pf-body{display:flex;align-items:center;gap:18px;}
   #pfDonut{width:148px;height:148px;flex:0 0 auto;}
   .pf-legend{flex:1;display:flex;flex-direction:column;gap:11px;min-width:0;}
   .pf-row{display:flex;align-items:center;gap:10px;font-size:13.5px;}
   .pf-dot{width:11px;height:11px;border-radius:3px;flex:0 0 auto;}
-  .pf-lab{color:#c3cce4;font-weight:600;}
-  .pf-pct{margin-left:auto;font-weight:700;font-variant-numeric:tabular-nums;color:#eaf0fb;}
+  .pf-lab{color:#3a4759;font-weight:600;}
+  .pf-pct{margin-left:auto;font-weight:700;font-variant-numeric:tabular-nums;color:var(--navy);}
 
-  .chartcard h3{font-size:14px;margin:0 0 3px;font-weight:700;}
-  .chartcard .csub{font-size:11.5px;color:var(--muted);margin:0 0 12px;font-variant-numeric:tabular-nums;line-height:1.5;}
   #chart{width:100%;height:auto;display:block;}
-  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:12px 2px 0;font-size:12px;color:var(--muted);}
+  .legend{display:flex;flex-wrap:wrap;gap:13px;margin:12px 2px 0;font-size:12px;color:var(--muted);}
   .legend span{display:inline-flex;align-items:center;gap:7px;}
-  .legend i{width:17px;height:3px;border-radius:2px;display:inline-block;}
-  .legend i.glow{box-shadow:0 0 8px currentColor;}
-  .legend i.dash{height:0;border-top:2px dashed #6b7699;}
+  .legend i{width:16px;height:10px;border-radius:3px;display:inline-block;}
+  .legend i.line{height:3px;border-radius:2px;}
+  .legend i.dash{height:0;border-top:2px dashed #9aa9c0;width:16px;}
 
-  .cmp h3{font-size:14px;margin:0 0 13px;font-weight:700;}
   table{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums;}
   th,td{padding:11px 5px;text-align:right;border-bottom:1px solid var(--brd-soft);}
   th:first-child,td:first-child{text-align:left;color:var(--muted);font-weight:500;white-space:nowrap;}
-  thead th{font-size:12px;color:#c3cce4;font-weight:600;border-bottom:1px solid var(--brd);}
-  thead th .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle;box-shadow:0 0 8px currentColor;}
-  td.val{font-weight:600;color:#eaf0fb;}
-  .col-on{background:rgba(34,211,238,.07);}
-  thead th.col-on{border-bottom:2px solid var(--cyan);}
+  thead th{font-size:12px;color:var(--navy);font-weight:600;border-bottom:1px solid var(--brd);}
+  thead th .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle;}
+  td.val{font-weight:600;color:var(--navy);}
+  .col-on{background:var(--sky);}
+  thead th.col-on{border-bottom:2px solid var(--blue);}
+  .cmp .note{font-size:10.5px;color:var(--faint);margin:10px 2px 0;}
 
-  .disclaimer{font-size:11px;color:var(--muted);line-height:1.8;margin-top:20px;padding:16px;
-    background:rgba(255,255,255,.025);border:1px solid var(--brd-soft);border-radius:14px;}
-  .disclaimer b{color:#aeb9d6;}
-  footer.ft{text-align:center;font-size:10.5px;color:#4d5878;margin-top:22px;letter-spacing:.08em;}
+  .disclaimer{font-size:11px;color:var(--muted);line-height:1.8;margin-top:18px;padding:16px;background:var(--panel);border:1px solid var(--brd-soft);border-radius:14px;}
+  .disclaimer b{color:var(--navy);}
+
+  /* persistent site footer */
+  .site-foot{margin-top:26px;padding-top:18px;border-top:1px solid var(--brd);text-align:center;}
+  .foot-brand{display:flex;align-items:center;justify-content:center;gap:12px;}
+  .foot-logo{height:42px;width:auto;}
+  .foot-co{font-size:14px;font-weight:700;color:var(--navy);}
+  .foot-sub{font-size:11px;color:var(--muted);margin-top:1px;}
+  .foot-links{margin-top:12px;font-size:12px;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;}
+  .foot-links a{color:var(--blue);font-weight:600;text-decoration:none;border-bottom:1px solid transparent;}
+  .foot-links a:hover{border-bottom-color:var(--blue);}
+
+  /* terms modal */
+  .modal-bg{position:fixed;inset:0;background:rgba(15,30,55,.5);display:none;z-index:100;align-items:center;justify-content:center;padding:18px;}
+  .modal-bg.open{display:flex;animation:fade .2s ease both;}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  .modal{background:#fff;max-width:560px;width:100%;max-height:84vh;overflow:auto;border-radius:18px;padding:24px 22px 26px;position:relative;box-shadow:0 30px 70px -20px rgba(15,40,80,.5);}
+  .modal h3{margin:0 0 4px;color:var(--navy);font-size:18px;}
+  .modal .msub{font-size:11.5px;color:var(--muted);margin:0 0 14px;}
+  .modal-body{font-size:12.5px;color:#3a4759;line-height:1.9;}
+  .modal-body h4{font-size:13px;color:var(--navy);margin:15px 0 2px;}
+  .modal-body p{margin:0 0 4px;}
+  .modal-x{position:absolute;top:14px;right:14px;border:none;background:#eef2f8;width:32px;height:32px;border-radius:50%;font-size:18px;line-height:1;cursor:pointer;color:#64748b;}
 
   @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
 </style>
 </head>
 <body>
-<div class="bg"><div class="blob a"></div><div class="blob b"></div><div class="blob c"></div></div>
-<div class="grid-overlay"></div>
+<div class="bg"></div>
 
 <div class="wrap">
 
   <header class="hd">
     <div class="eyebrow"><span class="pulse"></span>Risk Profiling &amp; Simulation</div>
     <h1>リスク許容度診断<br><span class="g">資産運用シミュレーション</span></h1>
+    <p class="co-line">提供：株式会社Precision Financial</p>
   </header>
 
-  <!-- STEP 1 -->
+  <!-- 基本情報 -->
   <section class="card">
     <div class="step"><div><h2>基本情報</h2></div></div>
     <div class="divider"></div>
     <div class="grid2">
       <div class="field"><label for="ageStart">運用開始年齢</label>
-        <div class="inputrow"><input type="number" id="ageStart" inputmode="numeric" min="0" max="99" placeholder="35"><span class="unit">歳</span></div></div>
+        <div class="inputrow"><input class="fld" type="number" id="ageStart" inputmode="numeric" min="0" max="99" placeholder="35"><span class="unit">歳</span></div></div>
       <div class="field"><label for="ageEnd">運用終了年齢</label>
-        <div class="inputrow"><input type="number" id="ageEnd" inputmode="numeric" min="1" max="100" placeholder="65"><span class="unit">歳</span></div></div>
+        <div class="inputrow"><input class="fld" type="number" id="ageEnd" inputmode="numeric" min="1" max="100" placeholder="65"><span class="unit">歳</span></div></div>
       <div class="field"><label for="monthly">毎月の積立額</label>
-        <div class="inputrow"><input type="number" id="monthly" inputmode="numeric" min="0" step="1000" placeholder="30000"><span class="unit">円</span></div></div>
+        <div class="inputrow"><input class="fld money" type="text" id="monthly" inputmode="numeric" placeholder="30,000"><span class="unit">円</span></div></div>
       <div class="field"><label for="lump">一括投資額</label>
-        <div class="inputrow"><input type="number" id="lump" inputmode="numeric" min="0" step="10000" placeholder="0"><span class="unit">円</span></div></div>
+        <div class="inputrow"><input class="fld money" type="text" id="lump" inputmode="numeric" placeholder="0"><span class="unit">円</span></div></div>
     </div>
     <p class="hint">積立・一括どちらか、または両方を入力（片方は0でOK）<br>運用開始年齢は年代の判定にも使います</p>
   </section>
 
-  <!-- STEP 2 -->
+  <!-- 診断 -->
   <section class="card">
     <div class="step"><div><h2>リスク許容度を診断</h2></div></div>
     <div class="divider"></div>
 
-    <div class="field"><label>婚姻区分</label>
+    <div class="field"><label>モード</label>
       <div class="chips">
-        <span class="chip"><input type="radio" name="marital" id="m1" value="single"><label for="m1">未婚</label></span>
-        <span class="chip"><input type="radio" name="marital" id="m2" value="married"><label for="m2">既婚</label></span>
+        <span class="chip"><input type="radio" name="mode" id="mMarried" value="married" checked><label for="mMarried">既婚モード</label></span>
+        <span class="chip"><input type="radio" name="mode" id="mSingle" value="single"><label for="mSingle">未婚モード</label></span>
       </div>
+      <p class="mode-note">夫婦に関する設問（働き方・生命保険）が切り替わります。</p>
     </div>
 
     <div id="questions"></div>
@@ -253,29 +246,29 @@
     </div>
 
     <div class="hero">
-      <div class="hl" id="heroLabel">運用終了時の資産（想定）</div>
+      <div class="hl" id="heroLabel">運用終了時の資産（中央値）</div>
       <div class="hbig"><span class="num" id="heroMan">0</span><span class="yen">万円</span></div>
-      <div class="hfull" id="heroFull"></div>
+      <div class="hrange" id="heroRange"></div>
       <div class="herometa">
         <div class="metabox"><div class="ml">投資元本の合計</div><div class="mv" id="mPrincipal">—</div></div>
-        <div class="metabox"><div class="ml">運用益（増えた分）</div><div class="mv gain" id="mGain">—</div></div>
+        <div class="metabox"><div class="ml">運用益（中央値）</div><div class="mv gain" id="mGain">—</div></div>
       </div>
     </div>
 
     <div class="card chartcard">
-      <h3>資産の伸び方くらべ</h3>
-      <p class="csub" id="chartSub">年齢ごとの資産推移を3タイプで比較</p>
+      <h3>資産推移シミュレーション</h3>
+      <p class="csub" id="chartSub">モンテカルロ法による将来資産の分布</p>
       <svg id="chart" viewBox="0 0 640 340" role="img" aria-label="資産推移グラフ"></svg>
       <div class="legend">
-        <span style="color:var(--stable)"><i class="glow" style="background:var(--stable)"></i>安全重視 1%</span>
-        <span style="color:var(--balance)"><i class="glow" style="background:var(--balance)"></i>バランス 3%</span>
-        <span style="color:var(--aggr)"><i class="glow" style="background:var(--aggr)"></i>積極運用 6%</span>
+        <span><i class="line" id="lg-med"></i>想定リターン通り</span>
+        <span><i id="lg-b1"></i>25〜75%</span>
+        <span><i id="lg-b2"></i>10〜90%（下振れ〜上振れ）</span>
         <span><i class="dash"></i>投資元本</span>
       </div>
     </div>
 
     <div class="card cmp">
-      <h3>3タイプの試算くらべ</h3>
+      <h3>3タイプの試算くらべ（想定リターン通り）</h3>
       <table>
         <thead><tr>
           <th>項目</th>
@@ -289,14 +282,27 @@
           <tr><td>運用益</td><td class="val" id="g-stable">—</td><td class="val" id="g-balance">—</td><td class="val" id="g-aggr">—</td></tr>
         </tbody>
       </table>
+      <p class="note">※「想定リターン通り」は実効月利による複利計算（手数料・税金は考慮せず）。グラフの帯は各タイプの想定変動率（標準偏差 約3%／8%／15%）でモンテカルロ1,500回試行した下振れ〜上振れの範囲。</p>
     </div>
 
     <div class="disclaimer">
-      <b>ご注意</b>　本ツールの診断・シミュレーションは一般的な情報提供を目的としたもので、特定の金融商品の推奨・投資勧誘ではありません。想定利回り（1%／3%／6%）は試算のための仮定値であり、将来の運用成果を保証するものではありません。実際の運用には価格変動・元本割れのリスクがあります。最終的な判断はご自身の責任で行ってください。診断の設問は全国銀行協会「リスク許容度診断テスト」を参考に構成しています。
-      <span style="display:block;margin-top:12px;padding-top:12px;border-top:1px solid var(--brd-soft)"><b>利用条件</b>　本ツールに関する著作権その他一切の知的財産権は、Precision Financialに帰属します。Precision Financialの事前の書面による承諾を得ることなく、本ツールを金融商品の販売・募集・勧誘その他の営業を目的として使用すること、ならびに本ツールの全部または一部を複製・改変・転載・再配布する行為を禁止します。これらに違反した場合、Precision Financialは利用の差止めおよび損害賠償を請求することがあります。</span>
+      <b>ご注意</b>　本ツールの診断・シミュレーションは一般的な情報提供を目的としたもので、特定の金融商品の推奨・投資勧誘ではありません。予想資産額は想定利回り（1%／3%／6%）による複利計算（想定リターン通り）であり、グラフの帯は価格変動（標準偏差 約3%／8%／15%）を加味したモンテカルロ法（1,500回試行）による上振れ・下振れの範囲を示しています。手数料・税金は考慮していません。いずれも一定の前提に基づく試算であり、将来の運用成果を保証するものではありません。実際の運用には価格変動・元本割れのリスクがあります。最終的な判断はご自身の責任で行ってください。設問は全国銀行協会「リスク許容度診断テスト」を参考に構成しています。詳細は<a href="#" id="termsOpen2" style="color:var(--blue);font-weight:600">利用規約</a>をご確認ください。
     </div>
-    <footer class="ft">PRECISION FINANCIAL — RISK SIMULATOR</footer>
   </section>
+
+  <!-- persistent footer -->
+  <footer class="site-foot">
+    <div class="foot-brand">
+      <div style="text-align:center">
+        <div class="foot-co">株式会社Precision Financial</div>
+        <div class="foot-sub">日本がん・ファイナンシャル・プランナーズ協会（JCFP）会員</div>
+      </div>
+    </div>
+    <div class="foot-links">
+      <a href="#" id="termsOpen">利用規約</a>
+      <span>© 2026 Precision Financial Co., Ltd.</span>
+    </div>
+  </footer>
 
 </div>
 
@@ -311,16 +317,41 @@
   </div>
 </div>
 
+<!-- terms modal -->
+<div class="modal-bg" id="termsModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="利用規約">
+    <button class="modal-x" id="termsClose" aria-label="閉じる">×</button>
+    <h3>利用規約</h3>
+    <p class="msub">株式会社Precision Financial</p>
+    <div class="modal-body">
+      <h4>第1条（適用）</h4>
+      <p>本規約は、株式会社Precision Financial（以下「当社」といいます）が提供するリスク許容度診断・資産運用シミュレーションツール（以下「本ツール」といいます）の利用条件を定めるものです。利用者は、本規約に同意のうえ本ツールを利用するものとします。</p>
+      <h4>第2条（本ツールの性質）</h4>
+      <p>本ツールは一般的な情報提供を目的とするものであり、特定の金融商品の推奨・投資勧誘を行うものではありません。診断結果およびシミュレーション結果は一定の前提に基づく試算であり、将来の運用成果を保証するものではありません。</p>
+      <h4>第3条（禁止事項）</h4>
+      <p>利用者は、当社の事前の書面による承諾を得ることなく、本ツールを金融商品の販売・募集・勧誘その他の営業を目的として使用してはなりません。また、本ツールの全部または一部を複製・改変・転載・再配布する行為を禁止します。</p>
+      <h4>第4条（知的財産権）</h4>
+      <p>本ツールに関する著作権その他一切の知的財産権は、当社に帰属します。</p>
+      <h4>第5条（免責）</h4>
+      <p>当社は、本ツールの利用により利用者に生じたいかなる損害についても、当社の故意または重過失による場合を除き、一切の責任を負いません。当社は、本ツールの内容を予告なく変更・中断・終了することがあります。</p>
+      <h4>第6条（違反への対応）</h4>
+      <p>前条までの規定に違反した場合、当社は利用の差止めおよび損害賠償を請求することがあります。</p>
+      <h4>第7条（準拠法・管轄）</h4>
+      <p>本規約は日本法に準拠し、本ツールに関して紛争が生じた場合は、当社の所在地を管轄する裁判所を第一審の専属的合意管轄裁判所とします。</p>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
   "use strict";
 
   var TYPES = {
-    stable:  {name:"安全性重視タイプ", short:"安全重視", rate:0.01, color:"#2dd4bf", tag:"想定年利 1%",
+    stable:  {name:"安全性重視タイプ", short:"安全重視", rate:0.01, vol:0.03, color:"#1f9e8f", tag:"想定年利 1%",
               comment:"預金など身近で安全な運用を好むタイプ。値動きを抑え、元本の変動を最小限にして着実に育てる設計が向いています。"},
-    balance: {name:"バランス運用タイプ", short:"バランス", rate:0.03, color:"#5b9dff", tag:"想定年利 3%",
+    balance: {name:"バランス運用タイプ", short:"バランス", rate:0.03, vol:0.08, color:"#2f6fb5", tag:"想定年利 3%",
               comment:"安定と成長の中間スタイル。金融資産の4割程度を上限に、投資信託や株式などへ分散しながらコツコツ継続するのが合います。"},
-    aggr:    {name:"積極運用タイプ", short:"積極運用", rate:0.06, color:"#ffb454", tag:"想定年利 6%",
+    aggr:    {name:"積極運用タイプ", short:"積極運用", rate:0.06, vol:0.15, color:"#e07a1f", tag:"想定年利 6%",
               comment:"金融知識があり、リスクを恐れず運用できるタイプ。長期・分散・積立を前提に成長資産の比率を高める余地があります（偏りすぎない分散も意識を）。"}
   };
   var BAND_BONUS = {"20":4,"30":3,"40":2,"50":1,"60":0};
@@ -329,71 +360,99 @@
   function classify(t){ return t<=9?"stable":(t<=16?"balance":"aggr"); }
   var ZONES=[{key:"stable",lo:0,hi:9},{key:"balance",lo:9,hi:16},{key:"aggr",lo:16,hi:24}];
 
-  // ポートフォリオ例（安全性/流動性/収益性, 合計100）
-  var PORTFOLIO = {
-    stable:  {safe:60, liquid:30, ret:10},
-    balance: {safe:40, liquid:20, ret:40},
-    aggr:    {safe:30, liquid:10, ret:60}
-  };
-  var ASSETS = [
-    {key:"safe",   label:"安全性", color:"#34d399"},
-    {key:"liquid", label:"流動性", color:"#38bdf8"},
-    {key:"ret",    label:"収益性", color:"#fbbf24"}
-  ];
+  var PORTFOLIO = { stable:{safe:60,liquid:30,ret:10}, balance:{safe:40,liquid:20,ret:40}, aggr:{safe:30,liquid:10,ret:60} };
+  var ASSETS = [ {key:"safe",label:"安全性",color:"#f08a24"}, {key:"liquid",label:"流動性",color:"#93c83d"}, {key:"ret",label:"収益性",color:"#2f6fb5"} ];
 
-  var QUESTIONS = [
+  // 設問（既婚=married / 未婚=single でQ3・Q7を切替）
+  var Q_BASE = [
     ["年収分以上の貯蓄がある。",["ある","年収の半分くらいある","ない"]],
     ["毎年、年収の2割以上の貯蓄ができている。",["毎年できている","毎年ではないが少しできている","できていない"]],
-    ["現在、夫婦ともに働いている。",["2人ともフルタイムで働いている","1人はフルタイム、1人はパート","1人はフルタイム、1人は働いてない"]],
+    null,
     ["マイホームをもっている。",["もっている（ローンなし）","もっている（ローンあり）","もっていない"]],
     ["老後資金の準備をスタートさせている。",["計画的に準備を進めてきている","スタートしたばかり","まだしていない"]],
     ["定年まで会社に勤められる可能性が高い。",["可能性が高い","わからない","可能性がない"]],
-    ["夫婦ともに生命保険には十分に加入している。",["夫婦ともに十分に加入している","夫婦のいずれかは不足している","夫婦ともに不足気味"]],
+    null,
     ["金利の変更や為替相場に関心がある。",["とても関心がある","少し関心がある","まったく関心がない"]],
     ["運用商品が一時的に元本割れしても、解約せず持ちつづけられる自信がある。",["とても自信がある","少し自信がある","まったく自信がない"]],
     ["金融でわからないことがあると、自分で確認するほうだ。",["よく確認している","ときどき確認している","まったくしない"]]
   ];
+  var Q3_M=["現在、夫婦ともに働いている。",["2人ともフルタイムで働いている","1人はフルタイム、1人はパート","1人はフルタイム、1人は働いてない"]];
+  var Q3_S=["結婚しても夫婦ともに働いていくつもりである。",["2人ともフルタイムで働いていく","1人はフルタイム、1人はパート","1人はフルタイム、1人は働かない"]];
+  var Q7_M=["夫婦ともに生命保険には十分に加入している。",["夫婦ともに十分に加入している","夫婦のいずれかは不足している","夫婦ともに不足気味"]];
+  var Q7_S=["生命保険には十分に加入している。",["十分に加入している","十分ではないが加入している","加入していない"]];
+  function questionsFor(mode){ var q=Q_BASE.slice(); q[2]=(mode==="single")?Q3_S:Q3_M; q[6]=(mode==="single")?Q7_S:Q7_M; return q; }
 
+  var QUESTIONS = [];
   var qWrap=document.getElementById("questions");
-  QUESTIONS.forEach(function(q,qi){
-    var div=document.createElement("div"); div.className="q";
-    var opts=q[1].map(function(label,oi){var id="q"+qi+"_"+oi;
-      return '<div class="opt"><input type="radio" name="q'+qi+'" id="'+id+'" value="'+(2-oi)+'"><label for="'+id+'">'+label+'</label></div>';}).join("");
-    div.innerHTML='<div class="qhead"><span class="qn">Q'+(qi+1)+'</span><span class="qt">'+q[0]+'</span></div><div class="opts">'+opts+'</div>';
-    qWrap.appendChild(div);
-  });
+  function renderQuestions(mode){
+    QUESTIONS=questionsFor(mode);
+    qWrap.innerHTML=QUESTIONS.map(function(q,qi){
+      var opts=q[1].map(function(label,oi){var id="q"+qi+"_"+oi;
+        return '<div class="opt"><input type="radio" name="q'+qi+'" id="'+id+'" value="'+(2-oi)+'"><label for="'+id+'">'+label+'</label></div>';}).join("");
+      return '<div class="q"><div class="qhead"><span class="qn">Q'+(qi+1)+'</span><span class="qt">'+q[0]+'</span></div><div class="opts">'+opts+'</div></div>';
+    }).join("");
+  }
+  renderQuestions("married");
+  document.getElementsByName("mode").forEach(function(r){ r.addEventListener("change",function(){ if(r.checked) renderQuestions(r.value); }); });
+
+  // comma formatting for money inputs
+  function fmtComma(el){
+    var d=el.value.replace(/[^\d]/g,'');
+    el.value = d ? Number(d).toLocaleString('en-US') : '';
+  }
+  document.querySelectorAll('.money').forEach(function(el){ el.addEventListener('input',function(){ fmtComma(el); }); });
 
   function yen(n){ return Math.round(n).toLocaleString("ja-JP")+"円"; }
   function man(n){ return Math.round(n/10000).toLocaleString("ja-JP")+"万円"; }
-  function getNum(id){ var v=parseFloat(document.getElementById(id).value); return isNaN(v)?null:v; }
+  function getNum(id){ var raw=String(document.getElementById(id).value).replace(/,/g,''); var v=parseFloat(raw); return isNaN(v)?null:v; }
   function radioVal(name){ var el=document.querySelector('input[name="'+name+'"]:checked'); return el?el.value:null; }
   var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
 
-  function series(rate,years,monthly,lump){
-    var i=rate/12,p=[];
-    for(var t=0;t<=years;t++){var n=t*12;var lf=lump*Math.pow(1+i,n);var mf=(i===0)?monthly*n:monthly*(Math.pow(1+i,n)-1)/i;
-      p.push({year:t,total:lf+mf,principal:lump+monthly*12*t});}
-    return p;
-  }
   function niceMax(v){ if(v<=0)return 1; var pow=Math.pow(10,Math.floor(Math.log10(v))),f=v/pow,nf;
     if(f<=1)nf=1;else if(f<=2)nf=2;else if(f<=2.5)nf=2.5;else if(f<=5)nf=5;else nf=10; return nf*pow; }
 
-  /* gauge */
+  // ===== Monte Carlo =====
+  function randn(){ var u=0,v=0; while(u===0)u=Math.random(); while(v===0)v=Math.random(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+  function montecarlo(mu,sig,years,monthly,lump,paths){
+    var months=years*12, mu_m=Math.pow(1+mu,1/12)-1, sig_m=sig/Math.sqrt(12);
+    var yv=[]; for(var y=0;y<=years;y++) yv.push(new Float64Array(paths));
+    for(var p=0;p<paths;p++){
+      var bal=lump; yv[0][p]=bal;
+      for(var m=1;m<=months;m++){
+        var r=mu_m+sig_m*randn();
+        bal=bal*(1+r)+monthly;
+        if(bal<0)bal=0;
+        if(m%12===0) yv[(m/12)|0][p]=bal;
+      }
+    }
+    return yv;
+  }
+  function quant(sorted,q){ var i=(sorted.length-1)*q, lo=Math.floor(i), hi=Math.ceil(i); return lo===hi?sorted[lo]:sorted[lo]+(sorted[hi]-sorted[lo])*(i-lo); }
+  function bands(yv){ return yv.map(function(a){ var s=Array.prototype.slice.call(a).sort(function(x,y){return x-y;});
+      return {p10:quant(s,.10),p25:quant(s,.25),p50:quant(s,.50),p75:quant(s,.75),p90:quant(s,.90)}; }); }
+  // 確定計算（想定リターン通り・実効月利。三菱UFJ式と一致）
+  function detSeries(rate,years,monthly,lump){
+    var im=Math.pow(1+rate,1/12)-1, arr=[];
+    for(var t=0;t<=years;t++){ var n=t*12, lf=lump*Math.pow(1+im,n), mf=(im===0)?monthly*n:monthly*(Math.pow(1+im,n)-1)/im; arr.push(lf+mf); }
+    return arr;
+  }
+
+  // ===== gauge =====
   var GX=160,GY=176,GR=126;
   function gp(R,v){var t=Math.max(0,Math.min(24,v))/24,th=Math.PI*(1-t);return{x:GX+R*Math.cos(th),y:GY-R*Math.sin(th)};}
   function arc(R,lo,hi){var a=gp(R,lo),b=gp(R,hi);return "M"+a.x.toFixed(1)+" "+a.y.toFixed(1)+" A"+R+" "+R+" 0 0 1 "+b.x.toFixed(1)+" "+b.y.toFixed(1);}
   function buildGauge(onKey){
-    var svg='<defs><filter id="gglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>';
-    svg+='<path d="'+arc(GR,0,24)+'" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="16" stroke-linecap="round"/>';
+    var svg='';
+    svg+='<path d="'+arc(GR,0,24)+'" fill="none" stroke="#e3e9f2" stroke-width="16" stroke-linecap="round"/>';
     ZONES.forEach(function(z){var c=TYPES[z.key].color,on=(z.key===onKey);
-      svg+='<path d="'+arc(GR,z.lo+0.25,z.hi-0.25)+'" fill="none" stroke="'+c+'" stroke-width="'+(on?16:10)+'" stroke-linecap="round" opacity="'+(on?1:.32)+'"'+(on?' filter="url(#gglow)"':'')+'/>';
+      svg+='<path d="'+arc(GR,z.lo+0.25,z.hi-0.25)+'" fill="none" stroke="'+c+'" stroke-width="'+(on?16:10)+'" stroke-linecap="round" opacity="'+(on?1:.3)+'"/>';
       var mid=(z.lo+z.hi)/2,lp=gp(GR+22,mid);
-      svg+='<text x="'+lp.x.toFixed(1)+'" y="'+lp.y.toFixed(1)+'" text-anchor="middle" dominant-baseline="middle" font-size="11" font-weight="600" fill="'+(on?c:"#6b7699")+'" font-family="Zen Kaku Gothic New,sans-serif">'+TYPES[z.key].short+'</text>';});
-    svg+='<line id="ndl" x1="'+GX+'" y1="'+GY+'" x2="'+GX+'" y2="'+(GY-1)+'" stroke="#fff" stroke-width="3" stroke-linecap="round" filter="url(#gglow)"/>';
-    svg+='<circle id="ntip" cx="'+GX+'" cy="'+GY+'" r="5" fill="#fff" filter="url(#gglow)"/>';
-    svg+='<circle cx="'+GX+'" cy="'+GY+'" r="9" fill="#0b1224" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>';
-    svg+='<text id="gscore" x="'+GX+'" y="'+(GY-34)+'" text-anchor="middle" font-size="40" font-weight="700" fill="#fff" font-family="Space Grotesk,sans-serif">0</text>';
-    svg+='<text x="'+GX+'" y="'+(GY-10)+'" text-anchor="middle" font-size="11" letter-spacing="3" fill="#8893b0" font-family="Space Grotesk,sans-serif">SCORE / 100</text>';
+      svg+='<text x="'+lp.x.toFixed(1)+'" y="'+lp.y.toFixed(1)+'" text-anchor="middle" dominant-baseline="middle" font-size="11" font-weight="600" fill="'+(on?c:"#94a3b8")+'" font-family="Zen Kaku Gothic New,sans-serif">'+TYPES[z.key].short+'</text>';});
+    svg+='<line id="ndl" x1="'+GX+'" y1="'+GY+'" x2="'+GX+'" y2="'+(GY-1)+'" stroke="'+TYPES[onKey].color+'" stroke-width="3" stroke-linecap="round"/>';
+    svg+='<circle id="ntip" cx="'+GX+'" cy="'+GY+'" r="5" fill="'+TYPES[onKey].color+'"/>';
+    svg+='<circle cx="'+GX+'" cy="'+GY+'" r="9" fill="#fff" stroke="#cdd8e8" stroke-width="1.5"/>';
+    svg+='<text id="gscore" x="'+GX+'" y="'+(GY-34)+'" text-anchor="middle" font-size="40" font-weight="700" fill="#0e3a6b" font-family="Space Grotesk,sans-serif">0</text>';
+    svg+='<text x="'+GX+'" y="'+(GY-10)+'" text-anchor="middle" font-size="11" letter-spacing="3" fill="#94a3b8" font-family="Space Grotesk,sans-serif">SCORE / 100</text>';
     document.getElementById("gauge").innerHTML=svg;
   }
   function setNeedle(v,color){
@@ -405,10 +464,10 @@
     gs.textContent=Math.round(v/24*100);
   }
 
-  /* portfolio donut */
+  // ===== portfolio donut =====
   function drawPortfolio(onKey){
     var pf=PORTFOLIO[onKey], cx=90, cy=90, R=58, sw=24, C=2*Math.PI*R, acc=0, gap=2.2;
-    var svg='<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="'+sw+'"/>';
+    var svg='<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="none" stroke="#eef2f8" stroke-width="'+sw+'"/>';
     ASSETS.forEach(function(a){
       var pct=pf[a.key]; if(!pct) return;
       var len=pct/100*C, dash=Math.max(len-gap,0.5);
@@ -417,34 +476,44 @@
     });
     document.getElementById("pfDonut").innerHTML=svg;
     document.getElementById("pfLegend").innerHTML=ASSETS.map(function(a){
-      return '<div class="pf-row"><span class="pf-dot" style="background:'+a.color+';box-shadow:0 0 9px '+a.color+'"></span><span class="pf-lab">'+a.label+'</span><span class="pf-pct">'+pf[a.key]+'%</span></div>';
+      return '<div class="pf-row"><span class="pf-dot" style="background:'+a.color+'"></span><span class="pf-lab">'+a.label+'</span><span class="pf-pct">'+pf[a.key]+'%</span></div>';
     }).join("");
   }
 
-  /* chart */
-  function drawChart(startAge,endAge,sets,onKey){
+  // ===== fan chart =====
+  function drawChart(startAge,endAge,mc,det,monthly,lump,onKey){
     var W=640,H=340,pad={l:60,r:18,t:18,b:40},iw=W-pad.l-pad.r,ih=H-pad.t-pad.b;
-    var xmin=startAge,xmax=endAge,ymax=niceMax(Math.max.apply(null,sets.aggr.map(function(p){return p.total;})));
-    function X(a){return pad.l+(a-xmin)/(xmax-xmin)*iw;}
-    function Y(v){return pad.t+(1-v/ymax)*ih;}
-    function path(arr,key){return arr.map(function(p,i){return (i?"L":"M")+X(startAge+p.year).toFixed(1)+" "+Y(p[key]).toFixed(1);}).join(" ");}
+    var years=endAge-startAge;
+    var ymax=niceMax(Math.max(mc[mc.length-1].p90, det[det.length-1]));
+    function X(a){return pad.l+(a-startAge)/(endAge-startAge)*iw;}
+    function Y(v){return pad.t+(1-Math.min(v,ymax)/ymax)*ih;}
     var oc=TYPES[onKey].color;
-    var svg='<defs><filter id="cglow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>';
-    svg+='<linearGradient id="areaG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+oc+'" stop-opacity="0.28"/><stop offset="1" stop-color="'+oc+'" stop-opacity="0"/></linearGradient></defs>';
+    function band(hiK,loK){
+      var top=mc.map(function(b,i){return (i?"L":"M")+X(startAge+i).toFixed(1)+" "+Y(b[hiK]).toFixed(1);}).join(" ");
+      var bot=""; for(var i=mc.length-1;i>=0;i--){ bot+=" L"+X(startAge+i).toFixed(1)+" "+Y(mc[i][loK]).toFixed(1); }
+      return top+bot+" Z";
+    }
+    var svg='';
     for(var g=0;g<=4;g++){var val=ymax*g/4,y=Y(val);
-      svg+='<line x1="'+pad.l+'" y1="'+y.toFixed(1)+'" x2="'+(W-pad.r)+'" y2="'+y.toFixed(1)+'" stroke="rgba(255,255,255,.06)" stroke-width="1"/>';
-      svg+='<text x="'+(pad.l-9)+'" y="'+(y+4).toFixed(1)+'" text-anchor="end" font-size="10.5" fill="#5c6a8f" font-family="Space Grotesk,sans-serif">'+Math.round(val/10000).toLocaleString("ja-JP")+'万</text>';}
-    var span=endAge-startAge,stp=span<=12?2:(span<=24?5:10);
-    for(var a=startAge;a<=endAge;a+=stp){svg+='<text x="'+X(a).toFixed(1)+'" y="'+(H-pad.b+18)+'" text-anchor="middle" font-size="10.5" fill="#6b7699" font-family="Space Grotesk,sans-serif">'+a+'</text>';}
-    if((endAge-startAge)%stp!==0){svg+='<text x="'+X(endAge).toFixed(1)+'" y="'+(H-pad.b+18)+'" text-anchor="middle" font-size="10.5" fill="#6b7699" font-family="Space Grotesk,sans-serif">'+endAge+'</text>';}
-    var onSet=sets[onKey];
-    svg+='<path d="'+path(onSet,"total")+' L'+X(endAge).toFixed(1)+' '+Y(0).toFixed(1)+' L'+X(startAge).toFixed(1)+' '+Y(0).toFixed(1)+' Z" fill="url(#areaG)"/>';
-    svg+='<path d="'+path(onSet,"principal")+'" fill="none" stroke="#6b7699" stroke-width="1.8" stroke-dasharray="5 5"/>';
-    ["stable","balance","aggr"].forEach(function(k){var on=(k===onKey);
-      svg+='<path d="'+path(sets[k],"total")+'" fill="none" stroke-linejoin="round" stroke-linecap="round" stroke="'+TYPES[k].color+'" stroke-width="'+(on?3.4:1.6)+'" opacity="'+(on?1:.4)+'"'+(on?' filter="url(#cglow)"':'')+'/>';});
-    var last=onSet[onSet.length-1];
-    svg+='<circle cx="'+X(endAge).toFixed(1)+'" cy="'+Y(last.total).toFixed(1)+'" r="5" fill="'+oc+'" filter="url(#cglow)"/>';
+      svg+='<line x1="'+pad.l+'" y1="'+y.toFixed(1)+'" x2="'+(W-pad.r)+'" y2="'+y.toFixed(1)+'" stroke="#eef2f8" stroke-width="1"/>';
+      svg+='<text x="'+(pad.l-9)+'" y="'+(y+4).toFixed(1)+'" text-anchor="end" font-size="10.5" fill="#94a3b8" font-family="Space Grotesk,sans-serif">'+Math.round(val/10000).toLocaleString("ja-JP")+'万</text>';}
+    var stp=years<=12?2:(years<=24?5:10);
+    for(var a=startAge;a<=endAge;a+=stp){svg+='<text x="'+X(a).toFixed(1)+'" y="'+(H-pad.b+18)+'" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-family="Space Grotesk,sans-serif">'+a+'</text>';}
+    if(years%stp!==0){svg+='<text x="'+X(endAge).toFixed(1)+'" y="'+(H-pad.b+18)+'" text-anchor="middle" font-size="10.5" fill="#94a3b8" font-family="Space Grotesk,sans-serif">'+endAge+'</text>';}
+    // MC range bands (下振れ〜上振れ)
+    svg+='<path d="'+band("p90","p10")+'" fill="'+oc+'" opacity="0.10"/>';
+    svg+='<path d="'+band("p75","p25")+'" fill="'+oc+'" opacity="0.20"/>';
+    // principal dashed
+    var pr=det.map(function(v,i){var p=lump+monthly*12*i; return (i?"L":"M")+X(startAge+i).toFixed(1)+" "+Y(p).toFixed(1);}).join(" ");
+    svg+='<path d="'+pr+'" fill="none" stroke="#9aa9c0" stroke-width="1.8" stroke-dasharray="5 5"/>';
+    // deterministic center line (想定リターン通り)
+    var dl=det.map(function(v,i){return (i?"L":"M")+X(startAge+i).toFixed(1)+" "+Y(v).toFixed(1);}).join(" ");
+    svg+='<path d="'+dl+'" fill="none" stroke="'+oc+'" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/>';
+    svg+='<circle cx="'+X(endAge).toFixed(1)+'" cy="'+Y(det[det.length-1]).toFixed(1)+'" r="5" fill="'+oc+'"/>';
     document.getElementById("chart").innerHTML=svg;
+    document.getElementById("lg-med").style.background=oc;
+    document.getElementById("lg-b1").style.background=oc; document.getElementById("lg-b1").style.opacity="0.4";
+    document.getElementById("lg-b2").style.background=oc; document.getElementById("lg-b2").style.opacity="0.18";
   }
 
   function animate(dur,cb){ if(reduce){cb(1);return;} var t0=null;
@@ -454,6 +523,8 @@
   var errEl=document.getElementById("err");
   function showErr(m){errEl.textContent=m;errEl.classList.add("show");}
   function clearErr(){errEl.classList.remove("show");}
+
+  var PATHS=1500;
 
   document.getElementById("run").addEventListener("click",function(){
     clearErr();
@@ -466,20 +537,31 @@
 
     var bandKey=bandFromAge(s), total=qScore+BAND_BONUS[bandKey], onKey=classify(total), T=TYPES[onKey];
     var years=Math.round(e-s);
-    var sets={stable:series(.01,years,m,l),balance:series(.03,years,m,l),aggr:series(.06,years,m,l)};
-    var principal=l+m*12*years, fin=sets[onKey][years].total;
+
+    // 確定計算（想定リターン通り）＋ モンテカルロ（上振れ・下振れの範囲）
+    var det={}, allBands={};
+    ["stable","balance","aggr"].forEach(function(k){
+      det[k]=detSeries(TYPES[k].rate,years,m,l);
+      allBands[k]=bands(montecarlo(TYPES[k].rate,TYPES[k].vol,years,m,l,PATHS));
+    });
+    var mc=allBands[onKey], dser=det[onKey];
+    var principal=l+m*12*years;
+    var detFin=dser[years], fin=mc[years];
 
     document.getElementById("typeName").textContent=T.name;
     document.getElementById("typeName").style.color=T.color;
     document.getElementById("typeRate").textContent=T.tag;
     document.getElementById("typeComment").textContent=T.comment;
 
-    document.getElementById("heroLabel").textContent="運用終了時の資産（"+T.name+"・想定）";
-    document.getElementById("heroFull").textContent="（"+yen(fin)+" ／ "+years+"年間）";
-    document.getElementById("mPrincipal").textContent=man(principal);
-    document.getElementById("mGain").textContent="＋"+man(fin-principal);
+    drawPortfolio(onKey);
+    document.getElementById("pfSub").textContent="（"+T.name+"）の資産配分の一例";
 
-    ["stable","balance","aggr"].forEach(function(k){var f=sets[k][years].total;
+    document.getElementById("heroLabel").textContent="運用終了時の予想資産額（想定リターン通り・"+T.name+"）";
+    document.getElementById("heroRange").textContent="モンテカルロ試算（下振れ〜上振れ／10〜90%）："+man(fin.p10)+" 〜 "+man(fin.p90);
+    document.getElementById("mPrincipal").textContent=man(principal);
+    document.getElementById("mGain").textContent="＋"+man(detFin-principal);
+
+    ["stable","balance","aggr"].forEach(function(k){var f=det[k][years];
       document.getElementById("r-"+k).textContent=man(f);
       document.getElementById("g-"+k).textContent="＋"+man(f-principal);
       var on=(k===onKey);
@@ -491,24 +573,34 @@
       bandLabel(bandKey)+"・"+s+"歳〜"+e+"歳（"+years+"年間）／ "+(m>0?("毎月"+yen(m)):"")+(m>0&&l>0?" ＋ ":"")+(l>0?("一括"+yen(l)):"");
 
     buildGauge(onKey);
-    drawPortfolio(onKey);
-    document.getElementById("pfSub").textContent="（"+T.name+"）の資産配分の一例";
-    drawChart(s,e,sets,onKey);
+    drawChart(s,e,mc,dser,m,l,onKey);
 
     var res=document.getElementById("result");
     res.classList.add("show");
     res.scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"});
 
-    var heroEl=document.getElementById("heroMan"),finMan=Math.round(fin/10000);
+    var heroEl=document.getElementById("heroMan"),finMan=Math.round(detFin/10000);
     animate(950,function(p){setNeedle(total*p,T.color);heroEl.textContent=Math.round(finMan*p).toLocaleString("ja-JP");});
   });
 
   document.getElementById("reset").addEventListener("click",function(){
     clearErr();
-    document.querySelectorAll('input').forEach(function(el){if(el.type==="radio")el.checked=false;else el.value="";});
+    document.querySelectorAll('input').forEach(function(el){
+      if(el.type==="radio"){ el.checked=(el.id==="mMarried"); } else el.value="";
+    });
+    renderQuestions("married");
     document.getElementById("result").classList.remove("show");
     window.scrollTo({top:0,behavior:reduce?"auto":"smooth"});
   });
+
+  // terms modal
+  var modal=document.getElementById("termsModal");
+  function openModal(e){ if(e)e.preventDefault(); modal.classList.add("open"); }
+  function closeModal(){ modal.classList.remove("open"); }
+  document.getElementById("termsOpen").addEventListener("click",openModal);
+  var t2=document.getElementById("termsOpen2"); if(t2)t2.addEventListener("click",openModal);
+  document.getElementById("termsClose").addEventListener("click",closeModal);
+  modal.addEventListener("click",function(e){ if(e.target===modal) closeModal(); });
 })();
 </script>
 </body>
